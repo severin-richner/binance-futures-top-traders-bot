@@ -29,7 +29,7 @@ def trading_bot():
             cw.futures_change_leverage(symbol=config.SYMBOL, leverage=config.LEVERAGE)
             # execute market order
             price = h.try_market(config.SYMBOL, 'BUY', config.TRADING_AMT - pos_amt)
-            h.status(f"BUY order filled: {config.TRADING_AMT} {config.SYMBOL} at {price}")
+            h.status(f"BUY order filled: {config.TRADING_AMT - pos_amt} {config.SYMBOL} at {price}")
       
       if ratio < 1:
          if (-pos_amt < config.TRADING_AMT):
@@ -38,7 +38,7 @@ def trading_bot():
             cw.futures_change_leverage(symbol=config.SYMBOL, leverage=config.LEVERAGE)
             # execute market order
             price = h.try_market(config.SYMBOL, 'SELL', config.TRADING_AMT + pos_amt)
-            h.status(f"SELL order filled: {config.TRADING_AMT} {config.SYMBOL} at {price}")
+            h.status(f"SELL order filled: {config.TRADING_AMT + pos_amt} {config.SYMBOL} at {price}")
 
       sleep(config.REACTION_TIME)
 
