@@ -25,5 +25,5 @@ def retry_req(func, **kwargs):
 
 
 def request(**kw):
-    # wrap request funtion
+    # wrap request function
     return retry_req(requests.request, **kw)

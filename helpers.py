@@ -5,7 +5,7 @@ from time import sleep
 import logging
 import request_wrapper as rw
 import futures_info
-from config import BASE, TOKEN, CHAT_ID
+from config import TOKEN, CHAT_ID
 
 # logging
 logging.basicConfig(filename=f'Trading_Bot_Log.log', level=logging.INFO)
@@ -33,60 +33,60 @@ def next_status_time():
     return dtime(hour=h, minute=m, second=0).strftime("%H:%M:%S")
 
 
-def futures_balance():
+def futures_balance(base):
     """ amount for base-currency in futures account """
     balances = cw.futures_account_balance()
 
     for b in balances:
-        if b['asset'] == BASE:
+        if b['asset'] == base:
             return float(b['balance'])
 
 
-def futures_available():
+def futures_available(base):
     """ amount for available base currency (now USDT) in futures account """
     balances = cw.futures_account_balance()
 
     for b in balances:
-        if b['asset'] == BASE:
+        if b['asset'] == base:
             return float(b['withdrawAvailable'])
 
 
 def telegram_msg(msg):
-   """ sends telegram message """
-   if TOKEN != '' and CHAT_ID != '':
-      rw.request(method='GET', timeout=0.5, url='https://api.telegram.org/bot' + TOKEN + '/sendMessage?chat_id=' + CHAT_ID + '+&text=' + str(msg))
-   return
+    """ sends telegram message """
+    if TOKEN != '' and CHAT_ID != '':
+        rw.request(method='GET', timeout=0.5, url='https://api.telegram.org/bot' + TOKEN + '/sendMessage?chat_id=' + CHAT_ID + '+&text=' + str(msg))
+    return
 
 
 def status(additional):
-   """ prints status, logs it and sends it per telegram (if token is given) message
-      additonal:      optional string as additional information  """
+    """ prints status, logs it and sends it per telegram (if token is given) message
+        additonal:      optional string as additional information  """
    
-   status_msg = f"{timeNow()} " + additional
-   print(status_msg)
-   logging.info(status_msg)
-   telegram_msg(status_msg)
-   return
+    status_msg = f"{timeNow()} " + additional
+    print(status_msg)
+    logging.info(status_msg)
+    telegram_msg(status_msg)
+    return
 
 
 def current_position_amount(symbol):
-   """ returns position amount for current BTC position """
-   position_info = cw.futures_position_information(symbol=symbol)[0]                  # get position info
-   return float(position_info['positionAmt'])                                      # neg for short, pos for long
+    """ returns position amount for current BTC position """
+    position_info = cw.futures_position_information(symbol=symbol)[0]                  # get position info
+    return float(position_info['positionAmt'])                                      # neg for short, pos for long
 
 
 def get_quantity_precision(symbol):
-   for x in futures_info.info['symbols']:
-      if x['symbol'] == symbol:
-         return int(x['quantityPrecision'])
-   return -1
+    for x in futures_info.info['symbols']:
+        if x['symbol'] == symbol:
+            return int(x['quantityPrecision'])
+    return -1
 
 
 def get_price_precision(symbol):
-   for x in futures_info.info['symbols']:
-      if x['symbol'] == symbol:
-         return int(x['pricePrecision'])
-   return -1
+    for x in futures_info.info['symbols']:
+        if x['symbol'] == symbol:
+            return int(x['pricePrecision'])
+    return -1
 
 
 def try_market(sym, buy_sell, pos_amount):
