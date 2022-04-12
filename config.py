@@ -16,3 +16,5 @@ REACTION_TIME = [300, 600]
 # Telegram Bot Token and Chat ID. Updates are sent to this chat in addition to just being logged/printed. [OPTIONAL]
 TOKEN = ''
 CHAT_ID = ''
+# If GUI Dashboard should be run or not.
+DASHBOARD = False

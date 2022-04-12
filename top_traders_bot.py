@@ -7,6 +7,7 @@ from config import *
 from multiprocessing import Process
 import helpers as h
 from time import sleep
+from dashboard_gui import run_dashboard
 
 # check inputs
 assert(len(SYMBOLS) == len(TRADING_AMTS) == len(LEVERAGES) == len(TIME_FRAME) == len(REACTION_TIME))
@@ -59,6 +60,10 @@ def trading_bot(symbolElement, tradingAmount, leverage, timeFrame, reactionTime)
 if __name__ == "__main__":
    """ main thread, starts the different trading bots """
    try:
+      if DASHBOARD:
+         proc = Process(target=run_dashboard, args=())
+         proc.start()
+         
       for i in range(len(SYMBOLS)):
          proc = Process(target=trading_bot, args=[SYMBOLS[i], TRADING_AMTS[i], LEVERAGES[i], TIME_FRAME[i], REACTION_TIME[i]] )
          proc.start()

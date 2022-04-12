@@ -73,3 +73,7 @@ def futures_symbol_ticker(**kw):
 
 def futures_top_longshort_position_ratio(**kw):
    return retry_conn(client.futures_top_longshort_position_ratio, **kw)
+
+
+def futures_account(**kw):
+   return retry_conn(client.futures_account, **kw)

@@ -14,7 +14,7 @@ _Long/Short Ratio < 1:_ ***short***
 
 The settings can be adjusted in the **config.py** file. To start the bot, run the main script **top_traders_bot.py** with python. Make sure that all the files are in the same directory and the necessary packets are installed:
 
-`pip install python-binance requests`
+`pip install python-binance requests matplotlib PySimpleGUI`
 
 ## Disclaimer
 
