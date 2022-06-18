@@ -1,10 +1,10 @@
 from datetime import datetime
 from datetime import time as dtime
-import client_wrapper as cw
+import bot_scripts.client_wrapper as cw
 from time import sleep
 import logging
-import request_wrapper as rw
-import futures_info
+import bot_scripts.request_wrapper as rw
+import bot_scripts.futures_info as futures_info
 from config import TOKEN, CHAT_ID
 
 # logging

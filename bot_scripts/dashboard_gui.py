@@ -4,7 +4,7 @@ of the Futures Wallet.
 """
 
 import PySimpleGUI as sg
-from client_wrapper import futures_account
+from bot_scripts.client_wrapper import futures_account
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 

@@ -2,12 +2,12 @@
 Trading bot that buys/sells futures based on the "Top Traders Long/Short Ratio (Positions)". 
 """
 
-import client_wrapper as cw
+import bot_scripts.client_wrapper as cw
 from config import *
 from multiprocessing import Process
-import helpers as h
+import bot_scripts.helpers as h
 from time import sleep
-from dashboard_gui import run_dashboard
+from bot_scripts.dashboard_gui import run_dashboard
 
 # check inputs
 assert(len(SYMBOLS) == len(TRADING_AMTS) == len(LEVERAGES) == len(TIME_FRAME) == len(REACTION_TIME))
