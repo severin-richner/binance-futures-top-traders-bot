@@ -18,3 +18,5 @@ TOKEN = ''
 CHAT_ID = ''
 # If GUI Dashboard should be run or not.
 DASHBOARD = False
+# If futures_info should be refreshed on start up (unless Binance changed precisions for coins, this is not necessary)
+REFRESH_INFO = False

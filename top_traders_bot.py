@@ -60,6 +60,9 @@ def trading_bot(symbolElement, tradingAmount, leverage, timeFrame, reactionTime)
 if __name__ == "__main__":
    """ main thread, starts the different trading bots """
    try:
+      if REFRESH_INFO:
+         h.refresh_info()
+      
       if DASHBOARD:
          proc = Process(target=run_dashboard, args=())
          proc.start()

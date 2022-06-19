@@ -1,6 +1,7 @@
 from datetime import datetime
 from datetime import time as dtime
 import bot_scripts.client_wrapper as cw
+import json
 from time import sleep
 import logging
 import bot_scripts.request_wrapper as rw
@@ -71,8 +72,25 @@ def status(additional):
 
 def current_position_amount(symbol):
     """ returns position amount for current BTC position """
-    position_info = cw.futures_position_information(symbol=symbol)[0]                  # get position info
+    position_info = cw.futures_position_information(symbol=symbol)[0]               # get position info
     return float(position_info['positionAmt'])                                      # neg for short, pos for long
+
+
+def refresh_info():
+    """ refreshes the futures_info.py file """
+    print("Refreshing futures info...")
+    with open("./bot_scripts/futures_info.py", "w") as file:
+        today = datetime.today()
+        current_date = today.strftime("%d.%m.%Y")
+        file.write(f"\"\"\"\nbinance exchange info, last updated {current_date}\n(Used as lookup table for \"quantityPrecision\" and \"pricePrecision\" of coins.)\n\"\"\"\ninfo = ")
+         
+    info = cw.client.futures_exchange_info()
+    with open("./bot_scripts/futures_info.py", "a") as file:
+        content = json.dumps(info)
+        content = content.replace('true', 'True')
+        content = content.replace('false', 'False')
+        file.write(content)
+    return
 
 
 def get_quantity_precision(symbol):

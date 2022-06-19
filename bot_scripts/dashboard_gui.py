@@ -47,10 +47,10 @@ def update_data(window):
    for pos in positions:
       pos_amt = float(pos['positionAmt'])
       if pos_amt < 0:
-         pos_labels.append(f"SHORT {abs(pos_amt)} {pos['symbol']} ({pos['leverage']}x)\nmargin: {round(float(pos['initialMargin']), 2)}")
+         pos_labels.append(f"SHORT ({pos['leverage']}x)\n{abs(pos_amt)} {pos['symbol']}\nmargin: {round(float(pos['initialMargin']), 2)}")
          pos_sizes.append(float(pos['positionInitialMargin']))
       elif pos_amt > 0:
-         pos_labels.append(f"LONG {pos_amt} {pos['symbol']} ({pos['leverage']}x)\nmargin: {round(float(pos['initialMargin']), 2)}")
+         pos_labels.append(f"LONG ({pos['leverage']}x)\n{pos_amt} {pos['symbol']}\nmargin: {round(float(pos['initialMargin']), 2)}")
          pos_sizes.append(float(pos['positionInitialMargin']))
 
       if pos_amt != 0:
@@ -102,7 +102,7 @@ def update_data(window):
    if total_rel_pnl > 0:
       p.text(0.5, 0.5, f"+{str(total_rel_pnl)}%", horizontalalignment='center', verticalalignment='center', fontsize=24, color='green')
    else: 
-      p.text(0.5, 0.5, f"-{str(total_rel_pnl)}%", horizontalalignment='center', verticalalignment='center', fontsize=24, color='red')
+      p.text(0.5, 0.5, f"{str(total_rel_pnl)}%", horizontalalignment='center', verticalalignment='center', fontsize=24, color='red')
    
 
    draw_figure(fig, window['fig_cv'].TKCanvas)
@@ -119,9 +119,9 @@ def run_dashboard():
    layout = [
       [sg.Text(text='Binance Futures Dashboard', size=(30,1), font=('Any', 24)), sg.Push(), sg.Button(button_text='Refresh', size=(8,1))],
       [sg.Column(
-         layout=[[sg.Text(text='Futures Wallet Balance:\t', size=(30,1), font=('Any', 16)), sg.Text(text='0 USD', key='-Wallet-', size=(20,1), font=('Any', 16))],
-         [sg.Text(text='Balance in Position:\t', size=(30,1), font=('Any', 16)), sg.Text(text='0 USD', key='-Balance-', size=(20,1), font=('Any', 16))],
-         [sg.Text(text='Total unrealized PNL:\t', size=(30,1), font=('Any', 16)), sg.Text(text='0 USD', key='-PNL-', size=(20,1), font=('Any', 16))]]), sg.Push(), sg.Column(
+         layout=[[sg.Text(text='Futures Wallet Balance:\t', size=(30,1), font=('Any', 16)), sg.Text(text='0', key='-Wallet-', size=(20,1), font=('Any', 16))],
+         [sg.Text(text='Balance in Position:\t', size=(30,1), font=('Any', 16)), sg.Text(text='0', key='-Balance-', size=(20,1), font=('Any', 16))],
+         [sg.Text(text='Total unrealized PNL:\t', size=(30,1), font=('Any', 16)), sg.Text(text='0', key='-PNL-', size=(20,1), font=('Any', 16))]]), sg.Push(), sg.Column(
          layout=[[sg.Canvas(key='fig_cv',size=(400, 300))]], background_color='#2c2825', pad=(0, 0))]  # canvas for graph
    ]
 

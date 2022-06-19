@@ -32,27 +32,27 @@ def retry_conn(func, **kwargs):
 
 # warp the different functions
 def futures_account_balance(**kw):
-    return retry_conn(client.futures_account_balance, **kw)
+   return retry_conn(client.futures_account_balance, **kw)
 
 
 def futures_position_information(**kw):
-    return retry_conn(client.futures_position_information, **kw)
+   return retry_conn(client.futures_position_information, **kw)
 
 
 def futures_klines(**kw):
-    return retry_conn(client.futures_klines, **kw)
+   return retry_conn(client.futures_klines, **kw)
 
 
 def futures_create_order(**kw):
-    return retry_conn(client.futures_create_order, **kw)
+   return retry_conn(client.futures_create_order, **kw)
 
 
 def futures_change_leverage(**kw):
-    return retry_conn(client.futures_change_leverage, **kw)
+   return retry_conn(client.futures_change_leverage, **kw)
 
 
 def futures_get_open_orders(**kw):
-    return retry_conn(client.futures_get_open_orders, **kw)
+   return retry_conn(client.futures_get_open_orders, **kw)
 
 
 def futures_get_order(**kw):
@@ -60,15 +60,15 @@ def futures_get_order(**kw):
 
 
 def futures_cancel_all_open_orders(**kw):
-    return retry_conn(client.futures_cancel_all_open_orders, **kw)
+   return retry_conn(client.futures_cancel_all_open_orders, **kw)
 
 
 def futures_change_margin_type(**kw):
-    return retry_conn(client.futures_change_margin_type, **kw)
+   return retry_conn(client.futures_change_margin_type, **kw)
 
 
 def futures_symbol_ticker(**kw):
-    return retry_conn(client.futures_symbol_ticker, **kw)
+   return retry_conn(client.futures_symbol_ticker, **kw)
 
 
 def futures_top_longshort_position_ratio(**kw):
